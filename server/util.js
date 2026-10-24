@@ -45,6 +45,4 @@ export default {
     genUUID,
     genShortId,
     getCurTime,
-    getEnvData,
-    saveEnvData,
 };
