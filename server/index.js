@@ -8,7 +8,7 @@ export default {
             return await _handle(request, env, ctx);
         } catch (err) {
             console.error('Unhandled error:', err);
-            return new Response(err.message, { status: 500 });
+            return Response.json({ error: 500, message: '服务暂时不可用，请检查数据库初始化后重试' }, { status: 500 });
         }
     },
 };
@@ -29,12 +29,27 @@ async function _handle(req, env, ctx) {
         });
     }
     const method = url.pathname.substring(5);
-    if (!service[method]) {
-        return util.jsonResp({ error: 404 });
+    if (!Object.hasOwn(service, method)) {
+        return Response.json({ error: 404, message: '接口不存在' }, { status: 404 });
     }
-    const body = req.body ? (await req.json()) : null;
+    if (req.method !== 'POST') {
+        return Response.json({ error: 405, message: '请求方法不支持' }, { status: 405, headers: { Allow: 'POST' } });
+    }
+    if (Number(req.headers.get('Content-Length')) > 1024 * 1024) {
+        return Response.json({ error: 413, message: '配置内容过大' }, { status: 413 });
+    }
+    let body;
+    try {
+        const raw = await req.text();
+        if (new TextEncoder().encode(raw).length > 1024 * 1024) {
+            return Response.json({ error: 413, message: '配置内容过大' }, { status: 413 });
+        }
+        body = raw ? JSON.parse(raw) : null;
+    } catch {
+        return Response.json({ error: 400, message: '请求内容必须是 JSON' }, { status: 400 });
+    }
     const result = await service[method](body, env, ctx);
-    return util.jsonResp(result);
+    return Response.json(result, { status: result.error || 200, headers: { 'Cache-Control': 'no-store' } });
 }
 
 
