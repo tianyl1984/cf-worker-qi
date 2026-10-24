@@ -4,7 +4,7 @@ import { useSuccessToast } from '@/composables/useSuccessToast.js'
 const BASE_URL = import.meta.env.VITE_BASE_URL || '';
 
 async function getUser() {
-    return await _doFetch('/api/user');
+    return await _doFetch('/api/user', null, false);
 }
 
 function logout() {

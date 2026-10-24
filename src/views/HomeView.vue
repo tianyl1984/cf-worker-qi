@@ -15,6 +15,10 @@ const fetchData = async () => {
 }
 
 const init = async () => {
+    const user = await api.getUser()
+    if (!user || user.error) {
+        return
+    }
     await fetchData()
 }
 
