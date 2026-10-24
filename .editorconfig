@@ -1,0 +1,14 @@
+[*]
+max_line_length = 150
+
+[*.js]
+indent_style = space
+indent_size = 4
+
+[*.mjs]
+indent_style = space
+indent_size = 4
+
+[*.vue]
+indent_style = space
+indent_size = 4
