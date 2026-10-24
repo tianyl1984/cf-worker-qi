@@ -1,12 +1,4 @@
-# cf-worker-template
-
-## 修改列表
-
-- package.json name
-
-- wrangler.jsonc
-
-- index.html
+# cf-worker-qi
 
 ## Project Setup
 
@@ -19,4 +11,3 @@ bun install
 ```sh
 bun run dev
 ```
-

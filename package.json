@@ -1,5 +1,5 @@
 {
-	"name": "cf-worker-template",
+	"name": "cf-worker-qi",
 	"version": "0.0.0",
 	"private": true,
 	"type": "module",

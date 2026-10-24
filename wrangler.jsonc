@@ -4,7 +4,7 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "cf-worker-template",
+	"name": "cf-worker-qi",
 	"compatibility_date": "2025-06-17",
 	"main": "server/index.js",
 	"assets": {
@@ -33,10 +33,13 @@
 		{
 			"binding": "authdata",
 			"id": "330bca4f689b415daa51c321882d97c7"
-		},
+		}
+	],
+	"d1_databases": [
 		{
-			"binding": "data",
-			"id": "5df89613327341ad8e40cb5ad76bdaf6"
+			"binding": "DB",
+			"database_name": "cf-worker-qi",
+			"database_id": "ee8aec1c-d9f0-4cd1-a16a-03540794c334"
 		}
 	]
 	/**
